@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "F4vK0cbXYOU=",
+  "success": true,
+  "projectFilePath": "/Users/jayanithyamadhushani/Documents/Project/CHAT/API/API.csproj",
+  "expectedPackageFiles": [
+    "/Users/jayanithyamadhushani/.nuget/packages/microsoft.aspnetcore.openapi/9.0.5/microsoft.aspnetcore.openapi.9.0.5.nupkg.sha512",
+    "/Users/jayanithyamadhushani/.nuget/packages/microsoft.openapi/1.6.17/microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
