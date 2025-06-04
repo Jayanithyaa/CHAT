@@ -1,6 +1,7 @@
 using System;
 using API.Common;
 using API.Models;
+using API.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,17 +13,29 @@ public static class AccountEndpoint
   {
     var group = app.MapGroup("/api/account").WithTags("account");
     group.MapPost("/register", async (HttpContext context, UserManager<AppUser>
-    UserManager, [FromForm] string fullName, [FromForm] string email, [FromForm] string password) =>
+    UserManager, [FromForm] string fullName, [FromForm] string email, [FromForm] string password, [FromForm] string userName, [FromForm] IFormFile? profileImage) =>
     {
       var userFromDb = await UserManager.FindByEmailAsync(email);
       if (userFromDb is not null)
       {
         return Results.BadRequest(Response<string>.Failure("User is already exist."));
       }
+
+      if (profileImage is null)
+      {
+        return Results.BadRequest(Response<string>.Failure("Profile image is required. "));
+      }
+
+      var picture = await FileUpload.Upload(profileImage);
+
+      picture = $"{context.Request.Scheme}://{context.Request.Host}/uploads/{picture}";
+
       var user = new AppUser
       {
         Email = email,
         FullName = fullName,
+        UserName = userName,
+        ProfileImage = picture
       };
 
       var result = await UserManager.CreateAsync(user, password);
@@ -31,7 +44,7 @@ public static class AccountEndpoint
         return Results.BadRequest(Response<string>.Failure(result.Errors.Select(x => x.Description).FirstOrDefault()!));
       }
       return Results.Ok(Response<string>.Success("", "User created sucessfully."));
-    });
+    }).DisableAntiforgery();
     return group;
   }
 
