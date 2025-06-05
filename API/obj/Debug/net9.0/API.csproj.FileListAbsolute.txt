@@ -161,3 +161,4 @@
 /Users/jayanithyamadhushani/Documents/Project/CHAT/API/obj/Debug/net9.0/API.pdb
 /Users/jayanithyamadhushani/Documents/Project/CHAT/API/obj/Debug/net9.0/API.genruntimeconfig.cache
 /Users/jayanithyamadhushani/Documents/Project/CHAT/API/obj/Debug/net9.0/ref/API.dll
+/Users/jayanithyamadhushani/Documents/Project/CHAT/API/bin/Debug/net9.0/API.staticwebassets.runtime.json
